@@ -48,7 +48,7 @@ jobs:
           LAST_RUN=$(curl --fail --silent --show-error --get \
             -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
-            "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/workflows/ci.yml/runs" \
+            "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/workflows/ascend-ci.yml/runs" \
             --data-urlencode "branch=${GITHUB_REF_NAME}" \
             --data-urlencode "status=success" --data-urlencode "per_page=1" \
             | jq -r '.workflow_runs[0].updated_at')

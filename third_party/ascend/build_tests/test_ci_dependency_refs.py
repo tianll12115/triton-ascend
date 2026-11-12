@@ -89,7 +89,7 @@ def test_runner_query_uses_the_current_branch_and_workflow_file(tmp_path, branch
     bash = str(git_bash) if git_bash.is_file() else shutil.which("bash")
     if bash is None:
         pytest.skip("Bash is required")
-    text = (REPO / ".github/workflows/runner-preparation.yml").read_text(encoding="utf-8")
+    text = (REPO / ".github/workflows/ascend-runner-preparation.yml").read_text(encoding="utf-8")
     step = text.split("      - name: Detect if enough time has passed since last post-submit run", 1)[1]
     match = re.search(r"        run: \|\n((?:          .*\n|\n)+)", step)
     script = textwrap.dedent(match.group(1))
@@ -101,7 +101,7 @@ def test_runner_query_uses_the_current_branch_and_workflow_file(tmp_path, branch
             branch, "GITHUB_API_URL": "https://api.github.com", "GITHUB_ENV": (tmp_path / "env").as_posix()
         }, capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
-    assert "/actions/workflows/ci.yml/runs" in result.stderr
+    assert "/actions/workflows/ascend-ci.yml/runs" in result.stderr
     assert "branch=" + branch in result.stderr
 
 
