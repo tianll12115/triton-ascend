@@ -348,9 +348,6 @@ def _ensure_distributed_submodule():
     if os.getenv("TRITON_BUILD_TD", "OFF").upper() not in ["ON", "1", "YES", "TRUE", "Y"]:
         return
     distributed_dir = _REPO_ROOT / "third_party" / "ascend" / "Triton-distributed-ascend"
-<<<<<<< HEAD
-    commit_id = "64e4e09ebf7899514aa7d4e8968db4198c7f0608"
-=======
     with open(_REPO_ROOT / "cmake" / "triton-distributed-info.json", encoding="utf-8") as metadata:
         info = json.load(metadata)
     commit_id = info["revision"]
@@ -359,7 +356,6 @@ def _ensure_distributed_submodule():
         raise ValueError("Triton-Distributed requires an HTTPS repository URL")
     if not isinstance(commit_id, str) or re.fullmatch(r"[0-9a-f]{40}", commit_id) is None:
         raise ValueError("Triton-Distributed revision must be a full commit SHA")
->>>>>>> upstream/pr-2844
     if not distributed_dir.is_dir():
         try:
             _git_check_call_with_retry([

@@ -20,7 +20,7 @@ def test_wheel_matrix_tracks_the_requested_source(tmp_path, event, ref):
     bash = str(git_bash) if git_bash.is_file() else shutil.which("bash")
     if bash is None or shutil.which("jq") is None:
         pytest.skip("Bash and jq are required")
-    text = (REPO / ".github/workflows/wheels.yml").read_text(encoding="utf-8")
+    text = (REPO / ".github/workflows/ascend-wheels.yml").read_text(encoding="utf-8")
     step = text.split("      - name: Select wheel source ref\n", 1)[1].split("\n  Build-Wheels:", 1)[0]
     match = re.search(r"        run: \|\n((?:          .*\n|\n)+)", step)
     script = textwrap.dedent(match.group(1))
@@ -111,7 +111,7 @@ def test_wheel_payload_must_match_the_resolved_source(tmp_path, source):
     bash = str(git_bash) if git_bash.is_file() else shutil.which("bash")
     if bash is None:
         pytest.skip("Bash is required")
-    text = (REPO / ".github/workflows/wheels.yml").read_text(encoding="utf-8")
+    text = (REPO / ".github/workflows/ascend-wheels.yml").read_text(encoding="utf-8")
     step = text.split("      - name: Prepare npuir payload\n", 1)[1].split("\n      - name:", 1)[0]
     script = textwrap.dedent(step.split("        run: |\n", 1)[1])
     payload = tmp_path / "npuir-artifacts/payload"

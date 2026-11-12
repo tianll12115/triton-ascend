@@ -85,14 +85,10 @@ else
   fi
   log "${BRANCH} HEAD: ${SHA}"
 fi
-<<<<<<< HEAD
-=======
-log "${BRANCH} HEAD: ${SHA}"
 if [ "$RESOLVE_ONLY" -eq 1 ]; then
   printf '%s\n' "$SHA"
   exit 0
 fi
->>>>>>> upstream/pr-2844
 
 NEED_FETCH=1
 if [ -d "${DEST}/.git" ]; then

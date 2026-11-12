@@ -11,15 +11,9 @@ on:
     branches: [release/**]
   pull_request:
     paths:
-<<<<<<< HEAD:.github/workflows/ascend-wheels.yml
       - .github/workflows/ascend-wheels.yml
-=======
-      - .github/workflows/wheels.yml
       - cmake/triton-distributed-info.json
       - cmake/npuir-info.json
-      - .github/workflows/build/fetch-npuir-stable.sh
-      - third_party/ascend/build/setup_patch.py
->>>>>>> upstream/pr-2844:.github/workflows/wheels.yml
       - .github/workflows/build/wheels.Dockerfile
       - .github/workflows/build/fetch-npuir-stable.sh
       - setup.py
@@ -85,21 +79,8 @@ jobs:
         - {runs_on: 'linux-amd64-cpu-4', arch: 'x86_64'}
         - {runs_on: 'linux-aarch64-cpu-4', arch: 'aarch64'}
         python: ["cp310", "cp311", "cp312", "cp313"]
-<<<<<<< HEAD:.github/workflows/ascend-wheels.yml
-        branch:
-        # npuir: OFF uses the prebuilt payload from npuir-build.yml, which
-        # tracks the AscendNPU-IR stable branch and is branch-independent (all
-        # matrix branches share the same payload); ON (only as the fallback
-        # when no artifact is available) builds the payload in-image via
-        # build_npuir.py, against the stable sources the wheels.Dockerfile
-        # pre-fetches (local builds use the pinned submodule instead).
-        - {ref: 'main', tag: 'main', local: 'dev', npuir: 'OFF'}
-        # - {ref: 'main-dev', tag: 'main-dev', local: 'dev', npuir: 'OFF'}
-        # - {ref: 'release/3.2.2', tag: 'release-3.2.2', local: 'release', npuir: 'OFF'}
-=======
         # NPU-IR still tracks its configured watch branch; this is not a release lock.
         branch: ${{ fromJSON(needs.deps.outputs.branch) }}
->>>>>>> upstream/pr-2844:.github/workflows/wheels.yml
 
     permissions:
       id-token: write
